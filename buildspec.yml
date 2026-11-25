@@ -6,7 +6,7 @@ phases:
       python: 3.12
   pre_build:
     commands:
-      - python -m pip install --quiet cfn-lint
+      - python -m pip install --quiet --require-hashes -r .github/requirements-lint.txt
       - cfn-lint infra/*.yaml
       - python -c "import json,glob,sys; [json.load(open(f)) for f in glob.glob('config/*.json')+glob.glob('teams/*/envs/*.json')]"
   build:
