@@ -38,6 +38,7 @@ jobs:
         with: { python-version: "3.12" }
       - run: pip install --quiet --require-hashes -r .github/requirements-lint.txt
       - run: cfn-lint infra/*.yaml
+      - run: python scripts/check_yaml.py
       - run: python -c "import json,glob; [json.load(open(f)) for f in glob.glob('config/*.json')+glob.glob('teams/*/envs/*.json')]"
       - run: python scripts/validate_manifests.py
       - run: python scripts/gen_aibom.py --check
